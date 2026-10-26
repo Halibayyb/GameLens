@@ -1,0 +1,37 @@
+#cloud-config
+package_update: true
+ssh_pwauth: false
+disable_root: true
+packages:
+  - ca-certificates
+  - curl
+  - git
+write_files:
+  - path: /usr/local/sbin/gamelens-up
+    permissions: "0755"
+    content: |
+      #!/bin/bash
+      set -euxo pipefail
+      exec > >(tee -a /var/log/gamelens-setup.log) 2>&1
+      if ! swapon --show | grep -q /swapfile; then
+        fallocate -l 2G /swapfile
+        chmod 600 /swapfile
+        mkswap /swapfile
+        swapon /swapfile
+        grep -q '/swapfile' /etc/fstab || echo '/swapfile none swap sw 0 0' >> /etc/fstab
+      fi
+      if ! command -v docker >/dev/null 2>&1; then
+        curl -fsSL https://get.docker.com | sh
+      fi
+      usermod -aG docker __ADMIN__
+      if [ ! -d /opt/gamelens/.git ]; then
+        git clone --depth 1 --branch __REF__ __REPO__ /opt/gamelens
+      fi
+      cd /opt/gamelens
+      docker compose version
+      # One image at a time: a B2s has 4 GiB and the web build is Node.
+      COMPOSE_PARALLEL_LIMIT=1 docker compose build
+      docker compose up -d
+      docker compose ps
+runcmd:
+  - /usr/local/sbin/gamelens-up

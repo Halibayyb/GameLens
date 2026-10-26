@@ -1,0 +1,45 @@
+/* Broadcast (perspective) replay: ported from good-assist-proto/src/style.css, on the app's tokens. */
+.bc { position: relative; width: 100%; min-width: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.bc-stage { position: relative; background: #f4f4ef; border-radius: var(--radius-l); overflow: hidden; box-shadow: 0 0 0 1px var(--line); }
+.bc-svg { display: block; width: 100%; height: auto; background: #f4f4ef; }
+@media (prefers-color-scheme: dark) { .bc-stage { box-shadow: 0 0 0 1px var(--line); } .bc-svg { filter: brightness(.74) contrast(1.06); } .bc-stage { background: #3a3a37; } }
+.bc-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.bc-ring { cursor: pointer; }
+.bc-ring:focus { outline: none; }
+.bc-ring:focus-visible .bc-sph { stroke: #2563eb; stroke-width: 6; stroke-dasharray: 10 6; }
+.bc-ring.on .bc-sph { filter: drop-shadow(0 0 5px #2563eb); }
+.bc-lbl { font-family: var(--mono); font-weight: 600; paint-order: stroke; stroke: #f4f4ef; stroke-linejoin: round; pointer-events: none; }
+.bc-fade { animation: bc-fade .4s ease-out both; }
+@keyframes bc-fade { from { opacity: 0; } to { opacity: 1; } }
+.bc-flash { transition: opacity .15s; }
+
+.bc-tip {
+  position: absolute; z-index: 5; pointer-events: none; width: max-content; max-width: min(240px, 80%);
+  background: #0f1419; color: #fff; border-radius: var(--radius-s); padding: var(--space-2) var(--space-3);
+  font: var(--fs-meta)/1.5 var(--font); transform: translate(-50%, calc(-100% - 8px));
+}
+.bc-tip b { display: block; margin-bottom: 2px; }
+
+.bc-bar { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2) var(--space-3); }
+.bc-export { min-height: 34px; padding: 0 12px; font: 700 .85rem var(--mono); background: var(--surface); color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); border-radius: var(--radius-m); }
+.bc-export:hover:not(:disabled) { background: var(--surface-2); }
+.bc-export:disabled { opacity: .5; }
+.bc-export:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.bc-status { font-size: var(--fs-meta); color: var(--muted); }
+.bc-legend { margin-left: auto; font-size: var(--fs-meta); color: var(--muted); }
+.bc-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin: 0 var(--space-1) 0 var(--space-3); }
+.bc-dot.home { background: var(--home); } .bc-dot.away { background: #fff; box-shadow: inset 0 0 0 1.5px #1f2430; }
+@media (max-width: 719px) { .bc-legend { margin-left: 0; flex-basis: 100%; } .bc-dot:first-child { margin-left: 0; } }
+
+@media (prefers-reduced-motion: reduce) { .bc-fade { animation: none; } .bc-flash { transition: none; } }
+
+/* phones: the replay runs edge to edge so the players stay readable */
+@media (max-width: 719px) { .bc-stage { margin: 0 calc(-1 * var(--gutter)); border-radius: 0; } }
+
+.bc-frames { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--space-2); overflow-x: auto; }
+.bc-frames button { display: grid; gap: 2px; text-align: left; min-width: 118px; max-width: 150px; padding: 6px 8px; background: var(--surface); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); border-radius: var(--radius-m); font: .72rem var(--mono); }
+.bc-frames button[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--ink); background: var(--surface-2); }
+.bc-frames button:hover:not(:disabled) { background: var(--surface-2); }
+.bc-frames button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.bc-fn { font-weight: 700; } .bc-ft { color: var(--muted); font-variant-numeric: tabular-nums; } .bc-fl { font: .7rem var(--font); line-height: 1.25; white-space: normal; }

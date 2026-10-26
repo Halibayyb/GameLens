@@ -1,0 +1,23 @@
+.env
+__pycache__/
+.pytest_cache/
+.venv/
+data/
+web/node_modules/
+web/dist/
+.azure/
+local_test_clips/
+local_test_outputs/
+
+
+# model weights live in models/ (vision/models.py), not in git
+models/
+*.pt
+
+.DS_Store
+
+# local footage, pipeline output and drafts: never published
+sample/
+result/
+docs/goal_0*/
+docs/GameLens_formula.pdf

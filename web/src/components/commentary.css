@@ -1,0 +1,22 @@
+/* Commentary placeholder: icon, a small label, then the caption line, in a navy bar the width of the video; white text, dimmed while it is idle. */
+.cc { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); background: #101a3a;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); border-radius: var(--radius-m); color: rgba(255,255,255,.72); min-height: 44px; }
+.cc-sound { display: grid; place-items: center; flex: none; width: 36px; height: 36px; min-height: 36px; padding: 0; border: 0; border-radius: var(--radius-s);
+  background: rgba(255,255,255,.1); color: inherit; cursor: pointer; }
+.cc-sound:hover:not(:disabled):not([aria-pressed="true"]) { background: rgba(255,255,255,.2); }
+.cc-sound[aria-pressed="true"], .cc-sound[aria-pressed="true"]:hover { background: #fff; color: #101a3a; }
+.cc-sound:disabled { opacity: .45; cursor: not-allowed; }
+.cc-sound:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.cc-tag { flex: none; font: 700 .68rem var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+.cc-text { flex: 1 1 auto; min-width: 0; margin: 0; font-size: var(--fs-body); }
+.cc-badge { flex: none; font: 700 .68rem var(--mono); padding: 1px 6px; border-radius: var(--radius-s); box-shadow: inset 0 0 0 1px currentColor; }
+/* the language picker is one of the site's own pills (theme tokens, light and dark), like the sound button when it is on */
+.cc-lang { flex: none; max-width: 10em; min-height: 32px; font: 600 var(--fs-meta) var(--font); line-height: 1.6;
+  padding: 0 var(--space-2); border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink);
+  accent-color: var(--accent); cursor: pointer; }
+.cc-lang:hover { background: var(--accent-tint); }
+.cc-lang:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.cc-lang option { color: var(--ink); background: var(--surface); }
+.cc.speaking { color: #fff; }
+.cc.speaking .cc-text { font-weight: 600; }
+@media (max-width: 719px) { .cc { flex-wrap: wrap; } .cc-text { flex-basis: 100%; order: 3; } .cc-lang { margin-left: auto; } }

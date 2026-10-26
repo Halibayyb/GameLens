@@ -1,0 +1,14 @@
+numpy>=1.26
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+# Microsoft hero stack (optional locally)
+openai>=1.40
+azure-eventhub>=5.11
+azure-identity>=1.16
+azure-messaging-webpubsubservice>=1.0
+azure-storage-blob>=12.19
+azure-cosmos>=4.7
+# Tests
+pytest>=8
+httpx>=0.27

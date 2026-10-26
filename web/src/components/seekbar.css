@@ -1,0 +1,29 @@
+/* Replay seekbar, ported from good-assist-proto (.seek) on the app's tokens. */
+.seek { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-m); padding: var(--space-2) var(--space-3) 6px; }
+.seek-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.seek-btn { min-width: 38px; min-height: 34px; height: 34px; padding: 0 8px; font: 700 .85rem var(--mono); background: var(--surface); color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); border-radius: var(--radius-m); }
+.seek-btn:hover:not(:disabled) { background: var(--surface-2); }
+.seek-btn:disabled { opacity: .5; }
+.seek-export { font-size: .75rem; margin-left: 4px; }
+.seek-btn:focus-visible, .seek-speed button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.seek-speed { display: flex; margin-left: 4px; box-shadow: inset 0 0 0 1px var(--ink); border-radius: var(--radius-m); overflow: hidden; }
+.seek-speed button { font: 600 .75rem var(--mono); background: var(--surface); color: var(--ink); height: 32px; min-height: 32px; padding: 0 8px; border-radius: 0; }
+.seek-speed button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.seek-time { margin-left: auto; font: 700 .9rem var(--mono); min-width: 5.2em; text-align: right; }
+.seek-track { position: relative; margin-top: 4px; padding-bottom: 20px; }
+.seek-track input[type="range"] { display: block; width: 100%; height: 24px; margin: 0; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; }
+.seek-track input[type="range"]::-webkit-slider-runnable-track { height: 3px; background: var(--line); border-radius: 2px; }
+.seek-track input[type="range"]::-moz-range-track { height: 3px; background: var(--line); border-radius: 2px; }
+.seek-track input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -6.5px; border-radius: 50%; background: var(--ink); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--ink); }
+.seek-track input[type="range"]::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: var(--ink); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--ink); }
+.seek-track input[type="range"]:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.seek-marks { position: absolute; left: 8px; right: 8px; top: 22px; height: 18px; pointer-events: none; }
+.seek-mark { position: absolute; top: 0; font: .62rem var(--mono); color: var(--muted); white-space: nowrap; }
+.seek-mark i { position: absolute; left: 0; top: -8px; width: 1px; height: 6px; background: var(--muted); }
+.seek-mark.c { transform: translateX(-50%); }
+.seek-mark.l { transform: translateX(-100%); padding-right: 3px; }
+.seek-mark.l i { left: auto; right: 0; }
+.seek-mark.r { padding-left: 3px; }
+.seek-mark.c i { left: 50%; }
+.seek-note { margin: 0; font-size: .72rem; color: var(--muted); }
+@media (max-width: 560px) { .seek-time, .seek-speed { margin-left: 0; } }

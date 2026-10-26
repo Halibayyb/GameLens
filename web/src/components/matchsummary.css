@@ -1,0 +1,24 @@
+/* Match summary: assist cards and the last-five-matches charts, on the app's tokens. */
+.ms { display: flex; flex-direction: column; gap: var(--space-3); }
+.ms-lead { font-size: var(--fs-body); }
+.ms-cards { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.ms-card { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); padding: var(--space-3); border-radius: var(--radius-m); background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.ms-card-top { display: flex; gap: var(--space-2); align-items: baseline; font-size: var(--fs-meta); }
+.ms-min { font: 700 .95rem var(--mono); color: var(--ink); }
+.ms-pass { font-weight: 600; }
+.ms-nums { display: flex; gap: var(--space-5); margin: 0; }
+.ms-nums dt { font: 600 .62rem var(--mono); text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+.ms-nums dd { margin: 0; font: 700 1.3rem/1.2 var(--mono); font-variant-numeric: tabular-nums; }
+.ms-history { margin-top: var(--space-4); padding: var(--space-4); border-radius: var(--radius-l); background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line); display: flex; flex-direction: column; gap: var(--space-3); }
+.ms-history-head { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-3); }
+.ms-history-head h3 { font-size: var(--fs-emph); font-weight: 700; }
+.ms-chip { font: 700 .66rem var(--mono); text-transform: uppercase; letter-spacing: .04em; padding: 2px 8px; border-radius: var(--radius-pill); background: var(--bg); color: var(--muted); box-shadow: inset 0 0 0 1px var(--muted); }
+.ms-forms { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.ms-form { margin: 0; padding: var(--space-3); border-radius: var(--radius-m); box-shadow: inset 0 0 0 1px var(--line); background: var(--bg); }
+.ms-form figcaption { margin-bottom: var(--space-2); font-size: var(--fs-body); }
+.ms-form svg { display: block; width: 100%; height: auto; }
+.ms-axis { font: 7.5px var(--mono); fill: var(--muted); }
+.ms-axis.now { fill: var(--ink); font-weight: 700; }
+.ms-val { font: 700 9px var(--mono); fill: var(--ink); }
+.ms-stats { margin-top: var(--space-2); font-size: var(--fs-meta); line-height: 1.5; }
+.ms-note { font-size: var(--fs-meta); }

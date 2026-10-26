@@ -1,0 +1,73 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["segments", "events", "posture", "notes"],
+  "properties": {
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["shot_id", "type", "match_label", "teams", "attack_right"],
+        "properties": {
+          "shot_id": {"type": "string"},
+          "type": {"type": "string", "enum": ["wide", "close", "replay", "other"]},
+          "match_label": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+          "teams": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["home", "away", "home_kit", "away_kit"],
+            "properties": {
+              "home": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+              "away": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+              "home_kit": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+              "away_kit": {"anyOf": [{"type": "string"}, {"type": "null"}]}
+            }
+          },
+          "attack_right": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["home"],
+            "properties": {"home": {"anyOf": [{"type": "boolean"}, {"type": "null"}]}}
+          }
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["t", "type", "actor_id", "receiver_id", "body_part", "lofted", "into_space", "confidence",
+                     "evidence"],
+        "properties": {
+          "t": {"type": "number"},
+          "type": {"type": "string", "enum": ["pass", "shot", "goal", "header", "tackle", "save"]},
+          "actor_id": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+          "receiver_id": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+          "body_part": {"anyOf": [{"type": "string", "enum": ["foot", "head", "other"]}, {"type": "null"}]},
+          "lofted": {"anyOf": [{"type": "boolean"}, {"type": "null"}]},
+          "into_space": {"anyOf": [{"type": "boolean"}, {"type": "null"}]},
+          "confidence": {"type": "number"},
+          "evidence": {"type": "string"}
+        }
+      }
+    },
+    "posture": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["t", "player_id", "facing", "body"],
+        "properties": {
+          "t": {"type": "number"},
+          "player_id": {"type": "string"},
+          "facing": {"anyOf": [{"type": "string", "enum": ["towards_goal", "away", "sideways"]}, {"type": "null"}]},
+          "body": {"anyOf": [{"type": "string", "enum": ["running", "standing", "jumping", "falling"]},
+                             {"type": "null"}]}
+        }
+      }
+    },
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}

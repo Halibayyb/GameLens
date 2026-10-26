@@ -1,0 +1,85 @@
+# Full demo stack on one machine. The default match is the offline synthetic
+# generator (no download). The web container serves the UI and proxies /api,
+# including the live WebSocket, to the API.
+#
+#   docker compose up --build
+#   open http://localhost
+#
+# Highlight jobs write to the shared `highlights` volume. The API processes
+# the authored demo in-process (no GPU). A real clip needs the worker profile:
+#
+#   docker compose --profile worker up --build
+#
+# Optional Azurite (local Blob):
+#   docker compose --profile azurite up
+#
+#
+# Override the feed only when you mean to, for example:
+#   MATCH_SOURCE=proto docker compose up --build
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      MATCH_SOURCE: ${MATCH_SOURCE:-synthetic}
+      MATCH_SEED: ${MATCH_SEED:-7}
+      HIGHLIGHTS_DIR: /app/data/highlights
+      PUBLISHED_DIR: /app/data/published
+      ADMIN_VIDEO: ${ADMIN_VIDEO:-0}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-}
+      HIGHLIGHTS_REMOTE_WORKER: ${HIGHLIGHTS_REMOTE_WORKER:-0}
+      AZURE_STORAGE_CONNECTION_STRING: ${AZURE_STORAGE_CONNECTION_STRING:-}
+    volumes:
+      - highlights:/app/data/highlights
+    ports:
+      - "${API_PORT:-8000}:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 25s
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "${WEB_PORT:-80}:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  # YOLO + ByteTrack worker. Off unless you pass --profile worker.
+  highlights-worker:
+    profiles: ["worker"]
+    build:
+      context: .
+      dockerfile: vision/Dockerfile
+    command: ["python", "-m", "highlights.worker", "--watch"]
+    environment:
+      HIGHLIGHTS_DIR: /data/highlights
+      VISION_DEVICE: ${VISION_DEVICE:-cpu}
+      VISION_MODEL: ${VISION_MODEL:-yolo11n.pt}
+      VISION_MAX_WIDTH: ${VISION_MAX_WIDTH:-960}
+    volumes:
+      - highlights:/data/highlights
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  azurite:
+    profiles: ["azurite"]
+    image: mcr.microsoft.com/azure-storage/azurite
+    command: ["azurite-blob", "--blobHost", "0.0.0.0", "--skipApiVersionCheck"]
+    ports:
+      - "10000:10000"
+    volumes:
+      - azurite:/data
+
+volumes:
+  highlights:
+  azurite:

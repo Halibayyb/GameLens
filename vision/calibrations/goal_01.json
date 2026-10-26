@@ -1,0 +1,49 @@
+{
+  "image_points": [
+    [
+      433.72,
+      101.15
+    ],
+    [
+      1515.66,
+      101.35
+    ],
+    [
+      1745.48,
+      1058.61
+    ],
+    [
+      216.66,
+      1058.07
+    ]
+  ],
+  "pitch_points": [
+    [
+      52.5,
+      68.0
+    ],
+    [
+      105.0,
+      68.0
+    ],
+    [
+      105.0,
+      0.0
+    ],
+    [
+      52.5,
+      0.0
+    ]
+  ],
+  "frame_size": [
+    1920,
+    1080
+  ],
+  "source": "docs/goal_01/goal1_home_throughball_71min_v2_final.mp4 (static camera): halfway line and goal line fitted to white pixels, intersected with both touchlines",
+  "check_px": {
+    "box_top": 0.3,
+    "box_bottom": 0.5,
+    "six_top": 0.4,
+    "six_bottom": 0.3
+  }
+}

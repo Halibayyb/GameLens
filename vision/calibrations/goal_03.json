@@ -1,0 +1,49 @@
+{
+  "image_points": [
+    [
+      520.03,
+      120.81
+    ],
+    [
+      1501.25,
+      121.03
+    ],
+    [
+      1718.77,
+      1003.6
+    ],
+    [
+      343.6,
+      1003.1
+    ]
+  ],
+  "pitch_points": [
+    [
+      52.5,
+      68.0
+    ],
+    [
+      105.0,
+      68.0
+    ],
+    [
+      105.0,
+      0.0
+    ],
+    [
+      52.5,
+      0.0
+    ]
+  ],
+  "frame_size": [
+    1920,
+    1080
+  ],
+  "source": "docs/goal_03/football_goal_8s_dataplay_v2.mp4 (static camera): halfway line and goal line fitted to white pixels, intersected with both touchlines",
+  "check_px": {
+    "box_top": 0.3,
+    "box_bottom": 0.3,
+    "six_top": 0.3,
+    "six_bottom": 0.5
+  }
+}

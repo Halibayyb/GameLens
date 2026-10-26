@@ -1,0 +1,40 @@
+/* How GameLens works: an editorial explainer (one readable column, underlined headings, figures with captions) on the app's tokens. */
+.how { border-radius: var(--radius-l); box-shadow: inset 0 0 0 1px var(--line); background: var(--surface); padding: var(--space-5) var(--gutter); }
+.how > summary { list-style: none; cursor: pointer; display: flex; flex-direction: column; gap: var(--space-2); max-width: 720px; margin: 0 auto; position: relative; padding-bottom: var(--space-4); }
+.how > summary::-webkit-details-marker { display: none; }
+.how > summary::after { content: "▾"; position: absolute; right: 0; top: 0; color: var(--muted); transition: transform .15s; }
+.how:not([open]) > summary::after { transform: rotate(-90deg); }
+.how > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; border-radius: var(--radius-s); }
+.how-eyebrow { font: 700 .7rem var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.how-title { font-size: clamp(1.7rem, 4vw, 2.3rem); line-height: 1.1; font-weight: 800; letter-spacing: -.01em; padding-bottom: var(--space-3); border-bottom: 4px solid var(--ink); width: fit-content; }
+.how-by { font: .8rem var(--mono); color: var(--muted); }
+.how-body { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-4); }
+.how-body p, .how-body li { font-size: 1.05rem; line-height: 1.6; }
+.how-lead { font-size: 1.25rem !important; line-height: 1.5 !important; }
+.how-body h3 { margin-top: var(--space-4); font-size: 1.3rem; font-weight: 800; width: fit-content; padding-bottom: 4px; border-bottom: 3px solid var(--ink); }
+.how-fig { margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.how-fig figcaption { font: .8rem var(--mono); color: var(--muted); }
+.how-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-4); }
+.how-steps li { display: flex; gap: var(--space-4); align-items: flex-start; }
+.how-n { flex: none; display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--ink); color: var(--bg); font: 800 1.2rem var(--mono); }
+.how-calc { margin: 0; padding: var(--space-4); border-radius: var(--radius-m); background: var(--surface-2); display: flex; flex-direction: column; gap: var(--space-3); }
+.how-eq { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.how-who { flex-basis: 100%; font-weight: 700; }
+.how-who small { font-weight: 400; color: var(--muted); margin-left: var(--space-2); }
+.how-chip { display: inline-flex; flex-direction: column; align-items: center; min-width: 4.2rem; padding: 6px 10px; border-radius: var(--radius-m); background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); font: 800 1.35rem/1.2 var(--mono); }
+.how-chip small { font: 600 .6rem var(--mono); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.how-chip.ev, .how-chip.x { background: var(--ink); color: var(--bg); box-shadow: none; }
+.how-chip.ev small, .how-chip.x small { color: var(--bg); opacity: .7; }
+.how-op { font: 800 1.4rem var(--mono); color: var(--muted); }
+.how-eq.played .how-chip:not(.ev) { box-shadow: inset 0 0 0 2px var(--ink); }
+.how-result { display: flex; align-items: center; gap: var(--space-3); padding-top: var(--space-3); border-top: 1px dashed var(--muted); font-size: 1rem; }
+.how-quote { margin: 0; padding: var(--space-2) var(--space-4); border-left: 5px solid var(--ink); font-size: 1.15rem; line-height: 1.55; }
+.how-flow { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+.how-flow li { display: flex; align-items: center; gap: var(--space-2); }
+.how-flow span { padding: 6px 12px; border-radius: var(--radius-m); background: var(--ink); color: var(--bg); font: 700 .85rem var(--mono); }
+.how-flow li:not(:first-child) span { background: var(--surface-2); color: var(--ink); }
+.how-flow i { font: .75rem var(--mono); color: var(--muted); font-style: normal; }
+.how-small { font-size: .9rem !important; color: var(--muted); }
+.how-know { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.how-know li { padding: var(--space-3); border-radius: var(--radius-m); box-shadow: inset 0 0 0 1px var(--line); font-size: .95rem; line-height: 1.5; }
+@media (prefers-reduced-motion: reduce) { .how > summary::after { transition: none; } }

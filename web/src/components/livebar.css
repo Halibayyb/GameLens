@@ -1,0 +1,28 @@
+/* Live match controls in the top bar (LiveBar.jsx). */
+.livebar { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
+@media (min-width: 720px) { .livebar { align-items: flex-end; flex: 0 1 460px; } }
+.live-row { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2) var(--space-3); min-width: 0; }
+@media (min-width: 720px) { .live-row { justify-content: flex-end; flex-wrap: nowrap; } }
+
+.live-btn { background: var(--accent); color: var(--on-accent); white-space: nowrap; }
+.live-btn:hover:not(:disabled) { background: var(--accent); filter: brightness(1.08); }
+.live-btn.ghost { background: var(--surface-2); color: var(--ink); filter: none; }
+.live-btn.ghost:hover:not(:disabled) { background: var(--surface-2); filter: brightness(.96); }
+.live-restart { white-space: nowrap; }
+.clock { font-size: var(--fs-title); font-weight: 700; min-width: 3ch; text-align: right; font-variant-numeric: tabular-nums; }
+
+.live-latest { flex: 1 1 12ch; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--fs-meta); color: var(--ink); }
+.live-latest b { font-weight: 600; color: var(--muted); margin-right: 2px; font-variant-numeric: tabular-nums; }
+.live-latest.goal { font-weight: 600; color: var(--accent); }
+
+.live-status { flex: 0 1 auto; min-width: 0; color: var(--muted); font-size: var(--fs-meta); }
+.live-status:empty { display: none; }
+
+/* match progress: a hairline on the bottom edge of the top bar (.top is the positioned ancestor) */
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: transparent; }
+.progress-fill { height: 100%; background: var(--accent); }
+
+@media (max-width: 719px) {
+  .live-latest { flex-basis: 100%; order: 3; }
+  .live-status { order: 4; }
+}

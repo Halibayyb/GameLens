@@ -1,0 +1,49 @@
+{
+  "image_points": [
+    [
+      403.23,
+      101.84
+    ],
+    [
+      1485.61,
+      101.79
+    ],
+    [
+      1702.51,
+      1058.23
+    ],
+    [
+      173.45,
+      1058.87
+    ]
+  ],
+  "pitch_points": [
+    [
+      0.0,
+      68.0
+    ],
+    [
+      52.5,
+      68.0
+    ],
+    [
+      52.5,
+      0.0
+    ],
+    [
+      0.0,
+      0.0
+    ]
+  ],
+  "frame_size": [
+    1920,
+    1080
+  ],
+  "source": "docs/goal_02/goal2_away_header_82min_v3_final.mp4 (static camera): halfway line and goal line fitted to white pixels, intersected with both touchlines",
+  "check_px": {
+    "box_top": 0.4,
+    "box_bottom": 0.2,
+    "six_top": 0.3,
+    "six_bottom": 0.4
+  }
+}

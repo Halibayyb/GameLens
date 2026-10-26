@@ -1,0 +1,14 @@
+Goal 2 · 82' · Away
+Synthetic data (no real players, clubs or matches). Percentages are estimated.
+Times are seconds around the pass: +0.00 s is the pass, the frame that is scored.
+
+01   −0.80 s  lead-in         the replay starts
+02   +0.00 s  the-pass        the scored frame: the moment of the pass, with the analysis
+03   +0.60 s  ball-in-flight  the ball is on its way
+04   +1.20 s  shot            the receiver finishes first time
+05   +1.68 s  goal            the ball crosses the line
+
+Options at the pass (ranked by expected value):
+A  Player 8  arrives 69%  goal 15%  cut out 0
+B  Player 9 (the pass played)  arrives 43%  goal 19%  cut out 1
+C  Player 10  arrives 39%  goal 16%  cut out 3

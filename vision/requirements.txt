@@ -1,0 +1,9 @@
+numpy>=1.26
+opencv-python-headless>=4.9
+ultralytics>=8.2
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+azure-storage-blob>=12.19
+azure-identity>=1.16
+openai>=1.40

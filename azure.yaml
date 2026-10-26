@@ -1,0 +1,27 @@
+# Azure Developer CLI: `azd up` provisions infra/main.bicep and deploys both services.
+name: matchday-access
+infra:
+  provider: bicep
+  path: infra
+  module: main
+services:
+  api:
+    project: .
+    language: python
+    host: containerapp
+    docker:
+      path: Dockerfile
+  web:
+    project: web
+    language: js
+    host: staticwebapp
+    dist: dist
+  vision:
+    project: .
+    language: python
+    host: containerapp
+    docker:
+      path: vision/Dockerfile
+      # Build in ACR: a local arm64 build of torch + ultralytics under amd64
+      # emulation, plus pushing the multi-GB image, overran azd's 20 min timeout.
+      remoteBuild: true

@@ -1,0 +1,50 @@
+/* Extracted data panel on the admin video page. Every rule is scoped under .xp. */
+.xp { border-top: 1px solid var(--line); padding-top: var(--space-4); }
+.xp > :not(summary) { margin-top: var(--space-4); }
+.xp-toggle { cursor: pointer; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-3); min-height: var(--tap); list-style: none; }
+.xp-h { font-size: var(--fs-body); margin: 0 0 var(--space-2); }
+.xp-summary { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: var(--space-2); margin: 0; }
+.xp-summary div { background: var(--surface); border-radius: var(--radius-m); padding: var(--space-2) var(--space-3); min-width: 0; }
+.xp-summary dt { font-size: var(--fs-meta); color: var(--muted); }
+.xp-summary dd { margin: 2px 0 0; font-weight: 600; overflow-wrap: anywhere; }
+.xp-track { position: relative; height: 36px; background: var(--surface); border-radius: var(--radius-s); cursor: pointer; overflow: hidden; }
+.xp-track:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.xp-seg { position: absolute; top: 5px; height: 12px; border-radius: 3px; }
+.xp-shot-wide { background: var(--accent); opacity: .75; }
+.xp-shot-close { background: var(--away); opacity: .75; }
+.xp-shot-other, .xp-shot-replay { background: var(--muted); opacity: .6; }
+.xp-unmapped { position: absolute; top: 19px; width: 2px; height: 5px; background: var(--bad); }
+.xp-mark { position: absolute; top: 24px; width: 8px; height: 8px; border-radius: 50%; background: var(--home); transform: translateX(-4px); }
+.xp-cursor { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--ink); transform: translateX(-1px); pointer-events: none; }
+.xp-legend { margin: var(--space-2) 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.xp-sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-left: 6px; }
+.xp-unmapped-sw { background: var(--bad); }
+.xp-mark-sw { background: var(--home); border-radius: 50%; }
+.xp-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
+@media (min-width: 1100px) { .xp-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.xp-table-wrap { overflow: auto; max-height: 20rem; }
+.xp-table { width: 100%; border-collapse: collapse; font-size: var(--fs-meta); font-variant-numeric: tabular-nums; }
+.xp-table th, .xp-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.xp-table th { position: sticky; top: 0; background: var(--bg); color: var(--muted); font-weight: 600; }
+.xp-played td { background: var(--played); color: var(--on-played); font-weight: 600; }
+.xp-list { list-style: none; padding: 0; margin: 0 0 var(--space-2); display: flex; flex-direction: column; gap: var(--space-2); }
+.xp-assist p { margin: 0 0 var(--space-2); }
+.xp-toggle::-webkit-details-marker { display: none; }
+.xp-toggle::before { content: "▸"; color: var(--muted); }
+.xp[open] > .xp-toggle::before { content: "▾"; }
+
+.xp .xp-freeze { margin: 0.5rem 0; }
+.xp .xp-freeze canvas { width: 100%; height: auto; display: block; border-radius: 6px; background: #111; }
+
+.xp .xp-badge { display: inline-block; font-size: 0.75rem; padding: 0.1rem 0.45rem; border-radius: 999px; background: rgba(127,127,127,0.18); margin-left: 0.25rem; }
+.xp .xp-badge.ok { background: rgba(48,164,108,0.2); color: #30a46c; }
+.xp .xp-badge.warn { background: rgba(229,72,77,0.18); color: #e5484d; }
+.xp .xp-editor { display: grid; gap: 0.5rem; margin: 0.5rem 0; }
+.xp .xp-tabs { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+.xp .xp-tabs button.on { font-weight: 700; text-decoration: underline; }
+.xp .xp-edit-canvas { width: 100%; height: auto; display: block; border-radius: 6px; background: #111; touch-action: none; cursor: crosshair; }
+.xp .xp-edit-canvas.pitch { cursor: grab; }
+.xp .xp-marks { columns: 2; padding-left: 1rem; margin: 0.25rem 0; }
+.xp .xp-marks button { padding: 0 0.35rem; }
+.xp .xp-pass-flags { display: grid; gap: 0.35rem; }
+.xp .xp-error { color: #e5484d; }

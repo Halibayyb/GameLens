@@ -1,0 +1,33 @@
+/* Verdict panel, ported from good-assist-proto (.panel, .badge, .sentence, table) on the app's tokens. */
+.verdict { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; }
+.verdict-sentence { font-size: 1.3rem; line-height: 1.3; font-weight: 600; }
+.verdict-why { line-height: 1.45; }
+.verdict-note { font-size: var(--fs-meta); color: var(--muted); }
+.verdict .tag { display: inline-block; font-size: .62rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); box-shadow: inset 0 0 0 1px var(--line); border-radius: 3px; padding: 0 3px; margin-left: 3px; vertical-align: middle; }
+.verdict .tag.src { margin: 0 4px 0 0; }
+.verdict .letter { display: inline-grid; place-items: center; width: 1.6em; height: 1.6em; margin-right: 6px; border-radius: 50%; background: var(--ink); color: var(--bg); font-size: .68rem; font-weight: 700; }
+.verdict-caption { font-size: .75rem; color: var(--muted); line-height: 1.4; }
+.verdict-title { font-size: 1.1rem; font-weight: 700; }
+.verdict .letter { display: inline-grid; place-items: center; flex: none; width: 1.6em; height: 1.6em; margin-right: 6px; border-radius: 50%; background: var(--surface-2); color: var(--ink); font: 700 .68rem var(--mono); }
+.verdict .played .letter { background: var(--ink); color: var(--bg); }
+.verdict .who { min-width: 0; }
+.verdict .who .muted { white-space: nowrap; }
+.verdict .meter { display: block; height: 4px; margin-top: 3px; border-radius: 2px; background: var(--surface-2); overflow: hidden; }
+.verdict .meter-fill { display: block; height: 100%; background: var(--ink); border-radius: 2px; }
+.hero { border-radius: var(--radius-m); background: var(--surface-2); padding: var(--space-3); cursor: pointer; box-shadow: inset 0 0 0 1px var(--line); }
+.hero.on, .hero:hover { box-shadow: inset 0 0 0 2px var(--ink); }
+.hero:focus-visible, .opts .opt-row:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.hero-who { display: flex; align-items: center; font-weight: 600; margin-bottom: var(--space-2); }
+.hero-star { margin-left: auto; font: 700 .7rem var(--mono); text-transform: uppercase; letter-spacing: .04em; }
+.hero-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-2); margin: 0; }
+.hero-stats dt { font: 600 .62rem var(--mono); text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+.hero-stats dd { margin: 0; font: 700 1.3rem/1.15 var(--mono); font-variant-numeric: tabular-nums; }
+.opts { list-style: none; margin: 0; padding: 0; }
+.opts .opt-row { display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(5, minmax(34px, .7fr)); align-items: center; gap: var(--space-2); padding: 7px 4px; border-bottom: 1px solid var(--line); cursor: pointer; font: .76rem var(--mono); }
+.opts .opt-row:hover, .opts .opt-row.on { background: var(--surface-2); }
+.opt-who { display: flex; align-items: center; min-width: 0; }
+.opt-num { text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 479px) { .hero-stats { grid-template-columns: repeat(2, 1fr); } }
+.opts .opts-head { display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(5, minmax(34px, .7fr)); gap: var(--space-2); padding: 4px; border-bottom: 1px solid var(--line); font: 600 .62rem var(--mono); text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+.opts .opts-head span:not(:first-child) { text-align: right; }
+.verdict-chip { align-self: flex-start; font: 600 .75rem var(--mono); padding: 2px 8px; border-radius: var(--radius-pill); background: var(--surface-2); color: var(--muted); }

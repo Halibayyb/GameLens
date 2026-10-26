@@ -1,0 +1,18 @@
+.git
+.venv
+.azure
+.env
+data
+**/__pycache__
+**/.pytest_cache
+web/node_modules
+web/dist
+vision/**/__pycache__
+sample
+docs
+local_test_clips
+*.pt
+# Prepared weights: only the football models go into the build context (the vision image bakes them).
+models/*
+!models/football-*.pt
+media
