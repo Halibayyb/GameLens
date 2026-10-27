@@ -9,6 +9,8 @@ with a keyboard or a screen reader.
 
 **Live demo:** https://purple-meadow-07336de00.1.azurestaticapps.net/
 
+**Demo video:** https://www.youtube.com/watch?v=JGYESyRC4O4
+
 ## The idea
 
 Broadcasts show *what* happened. GameLens explains *why*: at the frame the pass was played, how likely was
