@@ -23,7 +23,7 @@ JSON matching the provided schema, with four parts.
 - `segments`: one entry per shot id. `type` is `wide` (the tactical camera, most of the players and pitch
   lines visible), `close` (one or two players fill the frame), `replay` (a slow-motion or alternate-angle
   repeat, often with a replay graphic or wipe) or `other` (crowd, bench, graphics). `match_label` is the
-  scorebug text exactly as shown, for example "Newcastle 2-3 Man City", or null. `teams` names the teams and
+  scorebug text exactly as shown, for example "Home 2-3 Away", or null. `teams` names the teams and
   describes their kits only when the scorebug or the kits make it clear which drawn team is which; otherwise
   null. `attack_right.home` is true when the `H` team attacks towards the right of the image in a wide shot,
   false when it attacks left, null when you cannot tell. Decide it from the goal: the team that shoots or
