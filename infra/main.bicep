@@ -20,8 +20,10 @@ param modelVersion string = '2025-04-14'
 param deployGpu bool = false
 @description('Region that offers Consumption-GPU-NC8as-T4 (Sweden Central, West US, Australia East).')
 param gpuLocation string = 'swedencentral'
-@description('Create serverless Cosmos DB for highlight job records. Leave false to keep JSON files only (the API always writes files).')
+@description('Create serverless Cosmos DB for highlight job records (on in main.parameters.json). False keeps JSON files only (the API always writes files).')
 param deployCosmos bool = false
+@description('Cosmos region. East US had no capacity for new accounts (Oct 2026), so prod uses eastus2.')
+param cosmosLocation string = location
 @description('Subscribe Event Grid BlobCreated on the highlights container to the API webhook. Enable after the API ingress is up so handshake can succeed.')
 param deployHighlightEvents bool = false
 @secure()
@@ -280,6 +282,9 @@ resource highlightJob 'Microsoft.App/jobs@2024-03-01' = {
           { name: 'VISION_DEVICE', value: 'cpu' }
           { name: 'VISION_MODEL', value: 'yolo11n.pt' }
           { name: 'VISION_MAX_WIDTH', value: '960' }
+          { name: 'COSMOS_ENDPOINT', value: deployCosmos ? cosmos.properties.documentEndpoint : '' }
+          { name: 'COSMOS_DATABASE', value: 'gamelens' }
+          { name: 'COSMOS_CONTAINER', value: 'highlights' }
         ]
       } ]
     }
@@ -316,13 +321,16 @@ resource highlightJobGpu 'Microsoft.App/jobs@2024-10-02-preview' = if (deployGpu
           { name: 'WEBPUBSUB_HIGHLIGHTS_HUB', value: 'highlights' }
           { name: 'VISION_DEVICE', value: 'cuda' }
           { name: 'VISION_MODEL', value: 'yolo11n.pt' }
+          { name: 'COSMOS_ENDPOINT', value: deployCosmos ? cosmos.properties.documentEndpoint : '' }
+          { name: 'COSMOS_DATABASE', value: 'gamelens' }
+          { name: 'COSMOS_CONTAINER', value: 'highlights' }
         ]
       } ]
     }
   }
 }
 
-resource jobBlob 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+resource jobBlob'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(storage.id, highlightJob.id, blobContributorRole)
   scope: storage
   properties: {
@@ -344,13 +352,13 @@ resource jobBlobGpu 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (d
 
 resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2024-05-15' = if (deployCosmos) {
   name: 'cosmos-${token}'
-  location: location
+  location: cosmosLocation
   tags: tags
   kind: 'GlobalDocumentDB'
   properties: {
     databaseAccountOfferType: 'Standard'
     capabilities: [ { name: 'EnableServerless' } ]
-    locations: [ { locationName: location, failoverPriority: 0 } ]
+    locations: [ { locationName: cosmosLocation, failoverPriority: 0 } ]
     consistencyPolicy: { defaultConsistencyLevel: 'Session' }
     disableLocalAuth: false
   }
@@ -370,6 +378,40 @@ resource cosmosHighlights 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/co
       id: 'highlights'
       partitionKey: { paths: ['/id'], kind: 'Hash' }
     }
+  }
+}
+
+// Cosmos data-plane RBAC (not an ARM role): built-in Data Contributor, so the
+// managed identities work without COSMOS_KEY.
+var cosmosDataContributor = '00000000-0000-0000-0000-000000000002'
+
+resource apiCosmos 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2024-05-15' = if (deployCosmos) {
+  parent: cosmos
+  name: guid(cosmos.id, api.id, cosmosDataContributor)
+  properties: {
+    roleDefinitionId: '${cosmos.id}/sqlRoleDefinitions/${cosmosDataContributor}'
+    principalId: api.identity.principalId
+    scope: cosmos.id
+  }
+}
+
+resource jobCosmos 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2024-05-15' = if (deployCosmos) {
+  parent: cosmos
+  name: guid(cosmos.id, highlightJob.id, cosmosDataContributor)
+  properties: {
+    roleDefinitionId: '${cosmos.id}/sqlRoleDefinitions/${cosmosDataContributor}'
+    principalId: highlightJob.identity.principalId
+    scope: cosmos.id
+  }
+}
+
+resource jobCosmosGpu 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2024-05-15' = if (deployCosmos && deployGpu) {
+  parent: cosmos
+  name: guid(cosmos.id, highlightJobGpu.id, cosmosDataContributor)
+  properties: {
+    roleDefinitionId: '${cosmos.id}/sqlRoleDefinitions/${cosmosDataContributor}'
+    principalId: highlightJobGpu.identity.principalId
+    scope: cosmos.id
   }
 }
 
