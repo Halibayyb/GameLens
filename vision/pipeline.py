@@ -583,7 +583,7 @@ def _kit(image, xyxy, color) -> tuple:
 def _kit_hist(image, xyxy) -> tuple:
     """What a kit is made of: shares of white, black, red, yellow, blue and magenta pixels on the torso.
 
-    Mean colour fails on stripes (Newcastle's black and white average to the grey of a pale blue shirt) and
+    Mean colour fails on stripes (a black-and-white striped kit averages to the grey of a pale blue shirt) and
     on light (one team splits into sunlit and shadowed players). Grass pixels are left out."""
     x1, y1, x2, y2 = [int(v) for v in xyxy]
     h, w = image.shape[:2]
